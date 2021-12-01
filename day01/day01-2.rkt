@@ -4,14 +4,11 @@
 
 (require "../common/read_files.rkt")
 
-(define (search f l)
-  (if (null? l) 0
-    (+ (if (> (car l) (car f)) 1 0) (search l (cdr l)))))
-
-(define (window l)
-  (if (< (length l) 3) null
-    (cons (+ (car l) (cadr l) (caddr l)) (window (cdr l)))))
+(define (search l)
+  (if (> (length l) 3)
+    (+ (if (> (apply + (take (cdr l) 3)) (apply + (take l 3))) 1 0)
+      (search (cdr l)))
+    0))
 
 (let ([data (read-file-of-numbers "./input")])
-  (let ([w (window data)])
-    (search w (cdr w))))
+  (search data))
