@@ -3,6 +3,7 @@
 (provide read-file-lines)
 (provide read-file-of-numbers)
 (provide read-file-lines-map-with)
+(provide csv->list)
 
 (define (read-file-lines filename)
   (let ([in (open-input-file filename)])
@@ -18,3 +19,6 @@
 
 (define (read-file-lines-map-with filename fns)
   (parselines (read-file-lines filename) fns))
+
+(define (csv->list str)
+  (string-split str ","))
