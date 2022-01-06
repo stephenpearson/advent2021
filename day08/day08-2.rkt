@@ -29,7 +29,7 @@
 
 (define (list->number l [v 0])
   (if (= (length l) 0) v
-    (list->number (cdr l) (+ (* v 10)(car l)))))
+    (list->number (cdr l) (+ (* v 10) (car l)))))
 
 (define (calc input)
   (if (= (length input) 0) 0
