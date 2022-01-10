@@ -7,15 +7,10 @@
 (define input (map (λ (l)
   (map (compose string->number string) (string->list l)))
     (read-file-lines "input")))
-(define mx (length (car input)))
-(define my (length input))
 
 (define (apply-grid grid fn)
-  (make-hash (for*/list ([x (in-range mx)] [y (in-range my)])
+  (make-hash (for*/list ([x (in-range 10)] [y (in-range 10)])
     (cons (cons x y) (fn grid x y (hash-ref grid (cons x y) 0))))))
-
-(define grid (apply-grid #hash()
-  (λ (g x y v) (list-ref (list-ref input y) x))))
 
 (define (count-flash grid x y)
   (apply + (for*/list ([a '(-1 0 1)] [b '(-1 0 1)])
@@ -35,4 +30,4 @@
   (if (= (length (filter zero? (hash-values grid))) 100) n
     (run (iterate grid) (add1 n))))
 
-(run grid)
+(run (apply-grid #hash() (λ (g x y v) (list-ref (list-ref input y) x))))
