@@ -17,14 +17,6 @@
 (define grid (apply-grid #hash()
   (λ (g x y v) (list-ref (list-ref input y) x))))
 
-(define (show-grid grid)
-  (for ([y (range my)])
-    (for ([x (range mx)])
-      (let ([v (hash-ref grid (cons x y))])
-        (printf "~a" (if (= v 10) "X" (if (> v 10) "." v)))))
-    (printf "\n"))
-  (printf "\n"))
-
 (define (count-flash grid x y)
   (apply + (for*/list ([a '(-1 0 1)] [b '(-1 0 1)])
     (if (and (= a 0) (= b 0)) 0
